@@ -1,0 +1,37 @@
+<header class="main-header">
+    <nav class="main-header__nav">
+        <ul class="main-header__item-list">
+            <li class="main-header__item"><a class="<% if(locals.mypath === '/') {%> active <% } %>" href="/">Shop</a></li>
+            
+            <li class="main-header__item"><a class="<% if(locals.mypath === '/products') {%> active <% } %>" href="/products">Products</a></li>
+    <% if(locals.isAuthenticated){ %>
+            <li class="main-header__item"><a class="<% if(locals.mypath === '/cart') {%> active <% } %>" href="/cart">Cart</a></li>
+            
+            <li class="main-header__item"><a class="<% if(locals.mypath === '/orders') {%> active <% } %>" href="/orders">Orders</a></li>
+            
+           
+           <li class="main-header__item"><a class="<% if(locals.mypath === '/admin/add-product') {%> active <% } %>" href="/admin/add-product">Add Product</a></li>
+            <li class="main-header__item"><a class="<% if(locals.mypath === '/admin/products') {%> active <% } %>" href="/admin/products">Admin Products</a></li> <% } %>
+   
+        </ul>
+        <ul class="main-header__item-list">
+                <% if(!locals.isAuthenticated){ %>
+            <li class="main-header__item">
+                <a class="<%= locals.mypath === '/login' ? 'active' : '' %>" href="/login">Login</a>
+            </li>
+            <li class="main-header__item">
+                <a class="<%= locals.mypath === '/sign-up' ? 'active' : '' %>" href="/sign-up">Sign-Up</a>
+            </li>
+         <% } %>
+
+             <% if(locals.isAuthenticated){ %>
+            <li class="main-header__item">
+                <form method="POST" action="/logout">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button type="submit">Logout</button>
+                </form>
+            </li>
+           <% } %>
+        </ul>
+    </nav>
+</header>
